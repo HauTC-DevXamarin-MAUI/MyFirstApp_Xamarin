@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<MasterDetailPage xmlns="http://xamarin.com/schemas/2014/forms"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                  xmlns:prism="http://prismlibrary.com"
+                  prism:ViewModelLocator.AutowireViewModel="True"
+                  xmlns:local="clr-namespace:MyFirstApp.Views"
+                  xmlns:renderer ="clr-namespace:MyFirstApp.CustomeRenderer"
+                  xmlns:effects="clr-namespace:MyFirstApp.Effects"
+                  x:Class="MyFirstApp.Views.MainPage"
+                  xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+                  Title="Main Page">
+
+
+
+    <MasterDetailPage.Master>
+        <ContentPage Title="Menu"
+                     BackgroundColor="{AppThemeBinding Dark={StaticResource SystemGray3Dark},
+                                                       Light={StaticResource SystemGray6 }}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" 
+                                 Grid.ColumnSpan="2" 
+                                 BackgroundColor="{AppThemeBinding Dark={StaticResource SystemPinkDark},
+                                                   Light={StaticResource SystemPink }}" 
+                                 HeightRequest="120" 
+                                 Orientation="Horizontal" 
+                                 Padding="5">
+                    <Frame HeightRequest="60" 
+                               WidthRequest="60" 
+                               CornerRadius="30" 
+                               VerticalOptions="Center" 
+                               BackgroundColor="White" 
+                               Margin="10"
+                               Padding="0">
+                        <Image Source="hau.jpg"
+                                   Aspect="AspectFill"
+                                   Margin="0"/>
+                    </Frame>
+                    <StackLayout VerticalOptions="Center" 
+                                     Spacing="2">
+                        <Label Text="{Binding Name}" 
+                                   FontAttributes="Bold" 
+                                   FontSize="Large" 
+                                   TextColor="White" 
+                                   Margin="10,0,0,0" 
+                                   VerticalOptions="Center"/>
+                        <Label Text="{Binding Name,StringFormat='{0:2F}@gmail.com'}" 
+                                   FontSize="Small" 
+                                   TextColor="White" 
+                                   Margin="10,0,0,0" 
+                                   VerticalOptions="Center"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout Padding="20"
+                             Grid.Row="1"
+                             Grid.ColumnSpan="2">
+                    <!-- TODO: // Update the Layout and add some real menu items  -->
+                    <!--<renderer:MyCustomeButton Text="Thông tin cá nhân"
+                                              CustomBorderColor="DeepPink"  
+                                              CustomBackgroundColor="Pink"
+                                              TextColor="White"
+                                              CustomBorderRadius="4"  
+                                              CustomBorderWidth="4"
+                                              Command="{Binding NavigateCommand}" 
+                                              CommandParameter="NavigationPage/InformationPage" />-->
+                    <renderer:MyCustomeButton Text="Thông tin cá nhân"
+                                              CustomBorderColor="DeepPink"  
+                                              CustomBackgroundColor="Pink"
+                                              TextColor="White"
+                                              CustomBorderRadius="4"  
+                                              CustomBorderWidth="4"
+                                              Command="{Binding NavigateParameterCommand}" />
+                    <renderer:MyCustomeButton Text="Duyệt hình ảnh"
+                                              CustomBorderColor="DeepPink"  
+                                              CustomBackgroundColor="Pink"
+                                              TextColor="White"
+                                              CustomBorderRadius="4"  
+                                              CustomBorderWidth="4"
+                                              Command="{Binding NavigateCommand}" 
+                                              CommandParameter="NavigationPage/ListPage" />
+                    
+                    <renderer:MyCustomeButton Text="Cài đặt"
+                                              CustomBorderColor="DeepPink"  
+                                              CustomBackgroundColor="Pink"
+                                              TextColor="White"
+                                              CustomBorderRadius="4"  
+                                              CustomBorderWidth="4"
+                                              Command="{Binding NavigateCommand}" 
+                                              CommandParameter="NavigationPage/SettingsPage" />
+                    
+                    <renderer:MyCustomeButton x:Name="btnLogOut" 
+                                              Text="Đăng Xuất"
+                                              TextColor="White"
+                                              CustomBorderColor="Pink"  
+                                              CustomBackgroundColor="DeepPink"
+                                              CustomBorderRadius="4"  
+                                              CustomBorderWidth="4"
+                                              xct:TouchEffect.LongPressCommand="{Binding LongPressCommand}"
+                                              xct:TouchEffect.LongPressCommandParameter="LoginPage"
+                                              xct:TouchEffect.LongPressDuration="1500"
+                                              Clicked="btnLogOut_Pressed">
+                        <!--<renderer:MyCustomeButton.Effects>
+                            <effects:LongPressedEffect/>
+                        </renderer:MyCustomeButton.Effects>-->
+                    </renderer:MyCustomeButton>
+                </StackLayout>
+            </Grid>
+        </ContentPage>
+    </MasterDetailPage.Master>
+    
+    <!--<MasterDetailPage.Detail>
+        <local:MyPage/>
+    </MasterDetailPage.Detail>-->
+
+</MasterDetailPage>

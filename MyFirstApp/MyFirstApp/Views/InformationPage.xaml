@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             Title="Infomation Page"
+             x:Class="MyFirstApp.Views.InformationPage">
+    <StackLayout VerticalOptions="Center"
+                 HorizontalOptions="Center">
+        <Frame HeightRequest="200" 
+               WidthRequest="200"
+               BackgroundColor="White"
+               CornerRadius="200"
+               Padding="0"
+               Margin="0">
+            <Image Source="hau.jpg"
+                   Aspect="Fill"
+                   Margin="0"/>
+        </Frame>
+        <Label Text="{Binding UserName, StringFormat='UserName: {0:F2}'}"
+               FontSize="Subtitle"
+               FontAttributes="Bold"
+               HorizontalOptions="CenterAndExpand"
+               TextColor="Black"/>
+        <Label Text="{Binding PassWord, StringFormat='PassWord: {0:F2}'}"
+               HorizontalOptions="CenterAndExpand"
+               FontSize="Subtitle"
+               FontAttributes="Bold"
+               TextColor="LightGray"/>
+        <Label Text="{Binding UserName, StringFormat='Email: {0:F2}'}"
+               HorizontalOptions="CenterAndExpand"
+               FontSize="Subtitle"
+               FontAttributes="Bold"
+               TextColor="LightGray"/>
+        <!--Btn-->
+        <Button Text="Back"
+                WidthRequest="200"
+                BackgroundColor="Purple"
+                TextColor="White"
+                CornerRadius="10"
+                FontAttributes="Bold"
+                IsEnabled="False"
+                Command="{Binding BackCommand}"/>
+    </StackLayout>
+    
+</ContentPage>

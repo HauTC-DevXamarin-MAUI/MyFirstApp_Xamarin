@@ -1,0 +1,322 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:local ="clr-namespace:MyFirstApp.CustomeRenderer"
+             xmlns:converters="clr-namespace:MyFirstApp.Converters"
+             x:Class="MyFirstApp.Views.LoginPage">
+    
+    <ContentPage.Resources>
+        <!--Style-->
+        <Style TargetType="Button">
+            <Setter Property="CornerRadius"
+                    Value="20"/>
+            <Setter Property="FontAttributes"
+                    Value="Bold"/>
+        </Style>
+        
+        <!--Converter-->
+        <converters:UsernameCorrectConverter x:Key="UsernameCorrectConverter" />
+        <converters:UsernameCorrectToHideLabelConverter x:Key="UsernameCorrectToHideLabelConverter" />
+        <converters:PasswordCorrectConverter x:Key="PasswordCorrectConverter" />
+        <converters:PasswordCorrectToHideLabelConverter x:Key="PasswordCorrectToHideLabelConverter" />
+    </ContentPage.Resources>
+
+    <StackLayout Padding="0"
+                 BackgroundColor="LightGray">
+        <Grid>
+            <StackLayout Padding="0"
+                         Margin="0">
+                <Frame BackgroundColor="LightPink"
+                       HeightRequest="150"
+                       HorizontalOptions="FillAndExpand"
+                       Padding="0">
+                    <Image Source="login.jpeg" 
+                           Aspect="AspectFill"
+                           Margin="0"/>
+                </Frame>
+            </StackLayout>
+            
+            <StackLayout Margin="15,110,15,0">
+                <!--Container-->
+                <Frame BackgroundColor="{AppThemeBinding Dark={StaticResource SystemGray},
+                                                         Light={StaticResource SystemGray6}}"
+                       HasShadow="True"
+                       HeightRequest="520"
+                       HorizontalOptions="FillAndExpand">
+                    <StackLayout>
+                        <!--SignIN-->
+                        <StackLayout HorizontalOptions="CenterAndExpand">
+                            <Label Text="Sign in"
+                               TextColor="Black"
+                               FontSize="Medium"
+                               FontAttributes="Bold"/>
+                        </StackLayout>
+                        
+                        <StackLayout Padding="0"
+                                     Margin="0"
+                                     HeightRequest="45">
+                            <Label FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   IsVisible="False"
+                                   Text="Username is minimum eight characters ..."
+                                   TextColor="OrangeRed">
+                                <Label.Triggers>
+                                    <MultiTrigger TargetType="Label">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding Source={x:Reference userNameEntry}, 
+                                                                                Path=Text, 
+                                                                                Converter={StaticResource UsernameCorrectToHideLabelConverter}}" 
+                                                              Value="False" />
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </MultiTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+                            <Label FontSize="12"
+                                   HorizontalTextAlignment="Center"
+                                   IsVisible="False"
+                                   Text="Password is minimum eight characters, at least one letter and one special character: ..."
+                                   TextColor="OrangeRed">      
+                                <Label.Triggers>
+                                    <MultiTrigger TargetType="Label">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding Source={x:Reference passWordEntry}, Path=Text, Converter={StaticResource PasswordCorrectToHideLabelConverter}}" Value="False" />
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="IsVisible" Value="True" />
+                                    </MultiTrigger>
+                                </Label.Triggers>
+                            </Label>
+                        </StackLayout>
+
+
+                        <!--<ActivityIndicator x:Name="showLoginIndicator"
+                                           HorizontalOptions="Center"
+                                           IsRunning="false"
+                                           IsVisible="False"
+                                           VerticalOptions="Center"
+                                           Color="#ea0ea1">    
+                            
+                            <ActivityIndicator.Triggers>
+                                <MultiTrigger TargetType="ActivityIndicator">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Source={x:Reference checkBoxAgree}, 
+                                                                            Path=IsChecked}"
+                                                          Value="True"/>
+                                        <BindingCondition Binding="{Binding Source={x:Reference userNameEntry}, 
+                                                                            Path=Text, 
+                                                                            Converter={StaticResource UsernameCorrectConverter}}" 
+                                                          Value="True" />
+                                        <BindingCondition Binding="{Binding Source={x:Reference passWordEntry}, 
+                                                                            Path=Text, 
+                                                                            Converter={StaticResource PasswordCorrectConverter}}" 
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
+                                    <Setter Property="IsVisible" Value="True" />
+                                </MultiTrigger>
+                            </ActivityIndicator.Triggers>
+                        </ActivityIndicator>-->
+
+                        <!--Entry-->
+                        <StackLayout Margin="0"
+                                     Padding="10">
+                            <!--UserName-->
+                            <Frame BackgroundColor="Transparent"
+                                   BorderColor="DarkGray"
+                                   Padding="0"
+                                   Margin="0"
+                                   CornerRadius="50"
+                                   HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame BackgroundColor="AliceBlue"
+                                           CornerRadius="58"
+                                           HeightRequest="35"
+                                           WidthRequest="35"
+                                           Padding="0"
+                                           Margin="7"
+                                           HorizontalOptions="Start">
+                                        <Image Source="username.jpg"
+                                               Margin="0"
+                                               Aspect="AspectFit"/>
+                                    </Frame>
+                                    <local:MyCustomeEntry x:Name="userNameEntry"
+                                                          Placeholder="UserName"
+                                                          Text="{Binding UserName}"
+                                                          TextColor="HotPink"
+                                                          HorizontalOptions="FillAndExpand"
+                                                          Margin="0,0,15,0"/>          
+                                </StackLayout>
+                            </Frame>
+
+                            <!--Pass-->
+                            <Frame BackgroundColor="Transparent"
+                                   BorderColor="DarkGray"
+                                   Padding="0"
+                                   Margin="0,20,0,0"
+                                   CornerRadius="50"
+                                   HorizontalOptions="FillAndExpand">
+                                <StackLayout Orientation="Horizontal">
+                                    <Frame BackgroundColor="AliceBlue"
+                                           CornerRadius="58"
+                                           HeightRequest="35"
+                                           WidthRequest="35"
+                                           Padding="0"
+                                           Margin="7"
+                                           HorizontalOptions="Start">
+                                        <Image Source="password.jpg"
+                                               Margin="0"
+                                               Aspect="AspectFit"/>
+                                    </Frame>
+                                    <local:MyCustomeEntry  x:Name="passWordEntry" 
+                                                           Placeholder="Password"
+                                                           Text ="{Binding PassWord}"
+                                                           IsPassword="True"
+                                                           TextColor="HotPink"
+                                                           HorizontalOptions="FillAndExpand"
+                                                           Margin="0,0,15,0"/>
+                                </StackLayout>
+                            </Frame>
+                        </StackLayout>
+
+                        <StackLayout Orientation="Horizontal">
+                            <CheckBox x:Name="checkBoxAgree"
+                                      IsChecked="{Binding IsChecked, Mode=OneWayToSource}"
+                                      Color="HotPink"/>
+                            <Label Text="I Agree"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"/>
+                            <Label Text="Forgot Password"
+                                   HorizontalTextAlignment="End"
+                                   TextColor="HotPink"
+                                   HorizontalOptions="EndAndExpand"
+                                   FontAttributes="Bold"
+                                   VerticalTextAlignment="Center"/>
+                        </StackLayout>
+                        
+                        <!--Btn Login-->
+                        <Button Text="SIGN IN"
+                                IsEnabled="False"
+                                Command="{Binding LoginCommand}">
+                            <Button.Triggers>
+                                <!--Property Trigger-->
+                                <Trigger TargetType="Button"
+                                         Property="IsEnabled"
+                                         Value="False">
+                                    <Setter Property="BackgroundColor"
+                                            Value="LightGray"/>
+                                    <Setter Property="TextColor"
+                                            Value="Black"/>
+                                </Trigger>
+                                <!--Data Trigger-->
+                                <DataTrigger TargetType="Button"
+                                             Binding="{Binding Source={x:Reference checkBoxAgree}, Path=IsChecked}"
+                                             Value="True">
+                                    <Setter Property="IsEnabled"
+                                            Value="True"/>
+                                    <Setter Property="BackgroundColor"
+                                            Value="Purple"/>
+                                    <Setter Property="TextColor"
+                                            Value="White"/>
+                                </DataTrigger>
+
+                                <!--MultiTrigger-->
+                                <MultiTrigger TargetType="Button">
+                                    <MultiTrigger.Conditions>
+                                        <BindingCondition Binding="{Binding Source={x:Reference checkBoxAgree}, 
+                                                                            Path=IsChecked}"
+                                                                            Value="True"/>
+                                        <BindingCondition Binding="{Binding Source={x:Reference userNameEntry}, 
+                                                                            Path=Text, 
+                                                                            Converter={StaticResource 
+                                                                            UsernameCorrectConverter}}" 
+                                                          Value="True" />
+                                        <BindingCondition Binding="{Binding Source={x:Reference passWordEntry}, 
+                                                                            Path=Text, 
+                                                                            Converter={StaticResource PasswordCorrectConverter}}" 
+                                                          Value="True" />
+                                    </MultiTrigger.Conditions>
+
+                                    <Setter Property="IsEnabled" 
+                                            Value="True" />
+                                    <Setter Property="BackgroundColor"
+                                            Value="Purple"/>
+                                    <Setter Property="TextColor"
+                                            Value="White"/>
+                                </MultiTrigger>
+                            </Button.Triggers>
+                        </Button>
+
+                        <StackLayout Orientation="Horizontal"
+                                   HorizontalOptions="Center">
+                            <Label Text="Still Not Connected ? "                                  
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
+                            <Label Text="Sign Up"
+                                   HorizontalTextAlignment="Center"
+                                   TextColor="HotPink"
+                                   FontAttributes="Bold"
+                                   VerticalTextAlignment="Center"/>
+                        </StackLayout>
+
+                        <StackLayout>
+                            <Grid>                                
+                            <BoxView BackgroundColor="DarkGray"
+                                     HeightRequest="1"
+                                     Margin="50"
+                                     HorizontalOptions="CenterAndExpand"
+                                     WidthRequest="100"/>
+                                <Frame BackgroundColor="White"
+                                       WidthRequest="50"
+                                       HeightRequest="50"
+                                       Padding="0"
+                                       Margin="0"
+                                       HasShadow="False"
+                                       BorderColor="DarkGray"
+                                       VerticalOptions="Center"
+                                       HorizontalOptions="CenterAndExpand"
+                                       CornerRadius="50">
+                                    <Label Text="OR"
+                                           TextColor="DarkGray"
+                                           FontSize="Small"
+                                           FontAttributes="Bold"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"/>
+                                </Frame>
+                            </Grid>
+
+                            <StackLayout Orientation="Horizontal"
+                                         HorizontalOptions="CenterAndExpand">
+                                <Frame BackgroundColor="#4081e3"
+                                       WidthRequest="50"
+                                       HeightRequest="50"
+                                       Padding="0"
+                                       Margin="0"
+                                       HasShadow="False"
+                                       CornerRadius="50">
+                                    <Image Source="fb.png" 
+                                           Aspect="AspectFill"
+                                           Margin="0"/>
+                                </Frame>
+                                <Frame BackgroundColor="#52ebff"
+                                       WidthRequest="50"
+                                       HeightRequest="50"
+                                       Padding="0"
+                                       Margin="0"
+                                       HasShadow="False"
+                                       CornerRadius="50">
+                                    <Image Source="gmail.jpg" 
+                                           Aspect="AspectFill"
+                                           Margin="0"/>
+                                </Frame>
+                            </StackLayout>
+                        </StackLayout>
+                        
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </StackLayout>
+  
+</ContentPage>

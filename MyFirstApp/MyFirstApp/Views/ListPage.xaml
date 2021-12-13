@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             x:Class="MyFirstApp.Views.ListPage"
+             Title="List Page">
+    <StackLayout>
+        <ListView ItemsSource="{Binding PostList}" 
+                  SeparatorColor="Red"
+                  HasUnevenRows="True"
+                  SelectedItem="{Binding Post}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal"
+                                     Padding="5,10,10,10">
+                            <Frame BackgroundColor="#52ebff"
+                                   WidthRequest="80"
+                                   HeightRequest="80"
+                                   MinimumWidthRequest="80"
+                                   MinimumHeightRequest="80"
+                                   Padding="0"
+                                   Margin="0,0,5,0"
+                                   HasShadow="False"
+                                   CornerRadius="50">
+                                <!--<ffimageloading:CachedImage
+                                        DownsampleToViewSize="true"
+                                        HorizontalOptions="Center"
+                                        Source="{Binding ThumbnailUrl}"
+                                        VerticalOptions="Center"/>-->
+                                <Image Source="{Binding ThumbnailUrl}" 
+                                           Aspect="Fill"
+                                           Margin="0"/>
+                            </Frame>
+                            <StackLayout Orientation="Vertical" 
+                                         HorizontalOptions="FillAndExpand"
+                                         VerticalOptions="CenterAndExpand">
+                                <Label Text="{Binding TitlePhoto}"
+                                       VerticalTextAlignment="Center"
+                                       FontAttributes="Bold"
+                                       FontSize="Subtitle"
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding TitleAlbum}"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="Caption"/>
+                                <Label Text="{Binding Username}"
+                                       HorizontalTextAlignment="End"
+                                       FontSize="Small"
+                                       TextColor="LightGreen"/>
+                            </StackLayout>
+                            
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Behaviors>
+                <prism:EventToCommandBehavior EventName="ItemSelected" 
+                                              Command="{Binding OnItemSelectedCommand}"/>
+            </ListView.Behaviors>
+        </ListView>
+    </StackLayout>
+  
+</ContentPage>

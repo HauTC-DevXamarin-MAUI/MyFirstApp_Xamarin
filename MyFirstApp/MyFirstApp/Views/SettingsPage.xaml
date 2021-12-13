@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="MyFirstApp.Views.SettingsPage"
+             Title="Settings Page">
+    
+    
+    <StackLayout VerticalOptions="CenterAndExpand"
+                 HorizontalOptions="CenterAndExpand"
+                 Orientation="Horizontal"
+                 Padding="15"
+                 BackgroundColor="{AppThemeBinding Dark={StaticResource WindowBackgroundColorDark},
+                                                   Light={StaticResource WindowBackgroundColor }}"
+                 WidthRequest="300"
+                 HeightRequest="100">
+        <Label Text="THEME"
+               FontSize="Title"
+               FontAttributes="Bold,Italic"
+               TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                           Light={StaticResource TextColor }}"/>
+        <Label Text="Light/Dark"
+               VerticalTextAlignment="Center"
+               TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                           Light={StaticResource TextColor }}"/>
+        <Switch x:Name="switchTheme"
+                IsToggled="{Binding IsToggled}"
+                ThumbColor="{AppThemeBinding Dark={StaticResource SystemPink},
+                                                  Light={StaticResource SystemOrangeDark }}"
+                OnColor="{AppThemeBinding Dark={StaticResource SystemOrangeDark},
+                                                  Light={StaticResource SystemPink }}">
+            <Switch.Behaviors>
+                <prism:EventToCommandBehavior EventName="Toggled"
+                                              Command="{Binding InitToggledCommand}"/>
+            </Switch.Behaviors>
+        </Switch>
+        
+    </StackLayout>
+  
+</ContentPage>
