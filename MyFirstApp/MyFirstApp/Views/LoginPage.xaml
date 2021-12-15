@@ -53,7 +53,7 @@
                                FontSize="Medium"
                                FontAttributes="Bold"/>
                         </StackLayout>
-                        
+
                         <StackLayout Padding="0"
                                      Margin="0"
                                      HeightRequest="45">
@@ -79,7 +79,7 @@
                                    HorizontalTextAlignment="Center"
                                    IsVisible="False"
                                    Text="Password is minimum eight characters, at least one letter and one special character: ..."
-                                   TextColor="OrangeRed">      
+                                   TextColor="OrangeRed">
                                 <Label.Triggers>
                                     <MultiTrigger TargetType="Label">
                                         <MultiTrigger.Conditions>
@@ -90,34 +90,6 @@
                                 </Label.Triggers>
                             </Label>
                         </StackLayout>
-
-
-                        <!--<ActivityIndicator x:Name="showLoginIndicator"
-                                           HorizontalOptions="Center"
-                                           IsRunning="false"
-                                           IsVisible="False"
-                                           VerticalOptions="Center"
-                                           Color="#ea0ea1">    
-                            
-                            <ActivityIndicator.Triggers>
-                                <MultiTrigger TargetType="ActivityIndicator">
-                                    <MultiTrigger.Conditions>
-                                        <BindingCondition Binding="{Binding Source={x:Reference checkBoxAgree}, 
-                                                                            Path=IsChecked}"
-                                                          Value="True"/>
-                                        <BindingCondition Binding="{Binding Source={x:Reference userNameEntry}, 
-                                                                            Path=Text, 
-                                                                            Converter={StaticResource UsernameCorrectConverter}}" 
-                                                          Value="True" />
-                                        <BindingCondition Binding="{Binding Source={x:Reference passWordEntry}, 
-                                                                            Path=Text, 
-                                                                            Converter={StaticResource PasswordCorrectConverter}}" 
-                                                          Value="True" />
-                                    </MultiTrigger.Conditions>
-                                    <Setter Property="IsVisible" Value="True" />
-                                </MultiTrigger>
-                            </ActivityIndicator.Triggers>
-                        </ActivityIndicator>-->
 
                         <!--Entry-->
                         <StackLayout Margin="0"
@@ -134,7 +106,7 @@
                                            CornerRadius="58"
                                            HeightRequest="35"
                                            WidthRequest="35"
-                                           Padding="0"
+                                           Padding="5"
                                            Margin="7"
                                            HorizontalOptions="Start">
                                         <Image Source="username.jpg"
@@ -162,7 +134,7 @@
                                            CornerRadius="58"
                                            HeightRequest="35"
                                            WidthRequest="35"
-                                           Padding="0"
+                                           Padding="5"
                                            Margin="7"
                                            HorizontalOptions="Start">
                                         <Image Source="password.jpg"
@@ -197,17 +169,25 @@
                         
                         <!--Btn Login-->
                         <Button Text="SIGN IN"
-                                IsEnabled="False"
-                                Command="{Binding LoginCommand}">
+                                InputTransparent="True"
+                                Opacity="0.4">
+
+                            <!--Command="{Binding LoginCommand}"-->
+                            <Button.Behaviors>
+                                <prism:EventToCommandBehavior EventName="Clicked"
+                                                              Command="{Binding LoginCommand}"/>
+                            </Button.Behaviors>
                             <Button.Triggers>
                                 <!--Property Trigger-->
                                 <Trigger TargetType="Button"
-                                         Property="IsEnabled"
-                                         Value="False">
+                                         Property="InputTransparent"
+                                         Value="True">
                                     <Setter Property="BackgroundColor"
-                                            Value="LightGray"/>
+                                            Value="LightPink"/>
                                     <Setter Property="TextColor"
-                                            Value="Black"/>
+                                            Value="White"/>
+                                    <Setter Property="Opacity"
+                                            Value="0.4"/>
                                 </Trigger>
                                 <!--Data Trigger-->
                                 <!--<DataTrigger TargetType="Button"
@@ -237,8 +217,10 @@
                                                                             Value="True"/>
                                     </MultiTrigger.Conditions>
 
-                                    <Setter Property="IsEnabled" 
-                                            Value="True" />
+                                    <Setter Property="InputTransparent" 
+                                            Value="False" />
+                                    <Setter Property="Opacity" 
+                                            Value="1" />
                                     <Setter Property="BackgroundColor"
                                             Value="{AppThemeBinding Dark={StaticResource SystemRedDark},
                                                                     Light={StaticResource SystemPinkDark }}"/>

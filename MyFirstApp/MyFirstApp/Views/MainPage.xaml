@@ -73,21 +73,12 @@
 
                 <StackLayout Padding="20"
                              Grid.Row="1"
-                             Grid.ColumnSpan="2">
-                    <!-- TODO: // Update the Layout and add some real menu items  -->
-                    <!--<renderer:MyCustomeButton Text="Thông tin cá nhân"
-                                              CustomBorderColor="DeepPink"  
-                                              CustomBackgroundColor="Pink"
-                                              TextColor="White"
-                                              CustomBorderRadius="4"  
-                                              CustomBorderWidth="4"
-                                              Command="{Binding NavigateCommand}" 
-                                              CommandParameter="NavigationPage/InformationPage" />-->
+                             Grid.ColumnSpan="2">                  
                     <renderer:MyCustomeButton Text="Thông tin cá nhân"
                                               CustomBorderColor="DeepPink"  
                                               CustomBackgroundColor="Pink"
                                               TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
-                                                   Light={StaticResource TextColor }}"
+                                                                          Light={StaticResource TextColor }}"
                                               CustomBorderRadius="4"  
                                               CustomBorderWidth="4"
                                               Command="{Binding NavigateParameterCommand}" />
@@ -110,7 +101,7 @@
                                               CustomBorderWidth="4"
                                               Command="{Binding NavigateCommand}" 
                                               CommandParameter="NavigationPage/SettingsPage" />
-                    
+
                     <renderer:MyCustomeButton x:Name="btnLogOut" 
                                               Text="Đăng Xuất"
                                               TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
@@ -119,20 +110,25 @@
                                               CustomBackgroundColor="DeepPink"
                                               CustomBorderRadius="4"  
                                               CustomBorderWidth="4"
-                                              xct:TouchEffect.LongPressCommand="{Binding LongPressCommand}"
+                                              xct:TouchEffect.LongPressCommand="{Binding LongPressCommandButtonLogOut}"
                                               xct:TouchEffect.LongPressCommandParameter="LoginPage"
                                               xct:TouchEffect.LongPressDuration="1500"
                                               Clicked="btnLogOut_Pressed">
-                        <!--<renderer:MyCustomeButton.Effects>
-                            <effects:LongPressedEffect/>
-                        </renderer:MyCustomeButton.Effects>-->
                     </renderer:MyCustomeButton>
 
-                    <Button Text="Đăng Xuất Using Effect"
-                            effects:LongPressedEffect.Command="{Binding LongPressCommand}"
+                    <!--<Button Text="Đăng Xuất Effect 1"
+                            effects:LongPressedEffect.Command="{Binding LongPressCommandButtonLogOut}"
                             effects:LongPressedEffect.CommandParameter="LoginPage">
                         <Button.Effects>
                             <effects:LongPressedEffect/>
+                        </Button.Effects>
+                    </Button>-->
+
+                    <Button Text="Đăng Xuất Effect 2"
+                            effects:LongPressedEffectSecond.Command="{Binding LongPressCommandButtonLogOut}"
+                            effects:LongPressedEffectSecond.CommandParameter="LoginPage">
+                        <Button.Effects>
+                            <effects:LongPressedEffectSecond/>
                         </Button.Effects>
                     </Button>
                 </StackLayout>

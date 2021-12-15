@@ -10,8 +10,9 @@
                                                    Light={StaticResource SystemGray6 }}">
         <ListView ItemsSource="{Binding PostList}" 
                   SeparatorColor="Red"
-                  HasUnevenRows="True"
-                  SelectedItem="{Binding Post}">
+                  HasUnevenRows="True">
+            <!--SelectedItem="{Binding Post}"-->
+
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -63,7 +64,8 @@
             </ListView.ItemTemplate>
             <ListView.Behaviors>
                 <prism:EventToCommandBehavior EventName="ItemSelected" 
-                                              Command="{Binding OnItemSelectedCommand}"/>
+                                              Command="{Binding OnItemSelectedCommand}"
+                                              EventArgsParameterPath="SelectedItem"/>
             </ListView.Behaviors>
         </ListView>
     </StackLayout>

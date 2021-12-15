@@ -23,11 +23,6 @@ namespace MyFirstApp.ViewModels
 
         }
 
-        //public Task InitializeAsync(INavigationParameters parameters)
-        //{
-           
-        //}
-
         public void OnNavigatedFrom(INavigationParameters parameters)
         {
             throw new NotImplementedException();

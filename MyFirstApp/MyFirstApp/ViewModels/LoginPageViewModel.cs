@@ -33,31 +33,9 @@ namespace MyFirstApp.ViewModels
             set { SetProperty(ref _isChecked, value); }
         }
 
-
-        //#region EventAggregator
-
-        //protected IEventAggregator _ea;
-
-        //void HandleSend()
-        //{
-        //    _ea.GetEvent<SendEvent>().Publish(UserName);
-        //    //_ea.GetEvent<SendEvent>().Publish(PassWord);
-        //}
-
-        //#endregion
-
         public LoginPageViewModel()
         {
-            //IsEnable = true;
         }
-        //protected override void OnPropertyChanged(PropertyChangedEventArgs args)
-        //{
-        //    base.OnPropertyChanged(args);
-        //    if (args.PropertyName == "IsEnable" && IsEnable == false)
-        //    {
-
-        //    }
-        //}
 
         private readonly INavigationService _navigationService;
 
@@ -76,7 +54,7 @@ namespace MyFirstApp.ViewModels
 
         bool HandleCanLoginCommand()
         {
-            return !String.IsNullOrEmpty(UserName) && !String.IsNullOrEmpty(PassWord) && IsChecked;
+            return true;
         }
 
 

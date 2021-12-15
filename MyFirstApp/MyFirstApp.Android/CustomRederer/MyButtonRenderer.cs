@@ -36,11 +36,16 @@ namespace MyFirstApp.Droid.CustomRederer
         //    }
         //}
         private GradientDrawable _gradientBackground;
+        private MyCustomeButton view;
         protected override void OnElementChanged(ElementChangedEventArgs<Xamarin.Forms.Button> e)
         {
             base.OnElementChanged(e);
-            var view = (MyCustomeButton)Element;
-            if (view == null) return;
+            if (e.OldElement != null || e.NewElement == null)
+                return;
+            view = (MyCustomeButton)Element;
+
+            if (this.Control == null) 
+                return;
             Paint(view);
         }
 

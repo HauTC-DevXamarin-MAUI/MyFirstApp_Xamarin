@@ -48,17 +48,17 @@ namespace MyFirstApp.ViewModels
 
         }
         //Const 
-        const string User_Name = "name";
-        const string Pass_Word = "pass";
+        const string UserNameKey = "name";
+        const string PassWordKey = "pass";
         public async Task InitializeAsync(INavigationParameters parameters)
         {
-            if (parameters.ContainsKey(User_Name))
+            if (parameters.ContainsKey(UserNameKey))
             {
-                UserName = parameters.GetValue<String>(User_Name);
+                UserName = parameters.GetValue<String>(UserNameKey);
             }
-            if (parameters.ContainsKey(Pass_Word))
+            if (parameters.ContainsKey(PassWordKey))
             {
-                PassWord = parameters.GetValue<String>(Pass_Word);
+                PassWord = parameters.GetValue<String>(PassWordKey);
             }
         }
 

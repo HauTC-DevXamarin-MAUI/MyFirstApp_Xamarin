@@ -14,6 +14,7 @@ using Xamarin.Forms;
 namespace MyFirstApp.ViewModels
 {
     public class ListPageViewModel : BindableBase
+
     {
         INavigationService _navigationService;
         IPhotoService _photoService;
@@ -31,48 +32,40 @@ namespace MyFirstApp.ViewModels
         List<Album> AlbumList { get; set; } = new List<Album>();
         public ObservableCollection<Post> PostList { get; set; } = new ObservableCollection<Post>();
 
-        public DelegateCommand OnItemSelectedCommand { get; set; }
+        public DelegateCommand<Post> OnItemSelectedCommand{ get; set; }
         public ListPageViewModel(IPhotoService photoService, IAlbumService albumService, IUserService userService, INavigationService navigationService)
         {
             _navigationService = navigationService;
             _albumService = albumService;
             _userService = userService;
             _photoService = photoService;
-            OnItemSelectedCommand = new DelegateCommand(async () => await ExcuteItemSelected());
+            OnItemSelectedCommand = new DelegateCommand<Post>(ExcuteItemSelected);
             CallApi();
         }
 
-        private async Task ExcuteItemSelected()
+        private async void ExcuteItemSelected(Post obj)
         {
-            if(Post != null)
+            if (obj != null)
             {
                 var p = new NavigationParameters();
-                p.Add("post", Post);
+                p.Add("post", obj);
+
                 await _navigationService.NavigateAsync("DetailPage", p);
             }
         }
 
+
         private async void CallApi()
         {
             var users = await _userService.GetUsers();
-            //foreach (var item in users)
-            //{
-            //    UserList.Add(item);
-            //}
-            UserList.AddRange(users);
+            //UserList.AddRange(users);
+            UserList = users;
+
             var photos = await _photoService.GetPhotos();
-            //foreach (var item in photos)
-            //{
-            //    PhotoList.Add(item);
-            //}
-            PhotoList.AddRange(photos);
+            PhotoList = photos;
 
             var albums = await _albumService.GetAlbums();
-            //foreach (var item in albums)
-            //{
-            //    AlbumList.Add(item);
-            //}
-            AlbumList.AddRange(albums);
+            AlbumList = albums;
 
             var listPost = from p in PhotoList
                            join a in AlbumList on p.AlbumId.ToString() equals a.Id.ToString()
@@ -89,7 +82,6 @@ namespace MyFirstApp.ViewModels
             {
                 PostList.Add(new Post(item.Title, item.ThumbnailUrl, item.TitleAlbum, item.UserName));
             }
-            //PostList.addrange(listPost);
         }
     }
 }

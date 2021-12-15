@@ -9,7 +9,7 @@ namespace MyFirstApp.Services
 {
     public class AlbumService : IAlbumService
     {
-        public const string API = "http://jsonplaceholder.typicode.com";
+        const string API = "http://jsonplaceholder.typicode.com";
         public async Task<List<Album>> GetAlbums()
         {
             var responseAlbum = RestService.For<IAlbumService>(API);

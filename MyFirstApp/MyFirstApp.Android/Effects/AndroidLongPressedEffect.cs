@@ -13,7 +13,7 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
-[assembly: ResolutionGroupName("MyFirstApp")]
+//[assembly: ResolutionGroupName("MyFirstApp")]
 [assembly: ExportEffect(typeof(AndroidLongPressedEffect), "LongPressedEffect")]
 namespace MyFirstApp.Droid.Effects
 {

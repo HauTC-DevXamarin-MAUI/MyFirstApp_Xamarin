@@ -9,7 +9,7 @@ namespace MyFirstApp.Services
 {
     public class PhotoService : IPhotoService
     {
-        public const string API = "http://jsonplaceholder.typicode.com";
+        const string API = "http://jsonplaceholder.typicode.com";
 
         public async Task<List<Photo>> GetPhotos()
         {

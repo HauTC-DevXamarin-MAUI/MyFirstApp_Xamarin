@@ -10,11 +10,6 @@ namespace MyFirstApp.ViewModels
 {
     public class MainPageViewModel : BindableBase, IInitializeAsync
     {
-        //private int duration;
-        //public int Duration
-        //{
-        //    get { return duration; }
-        //    set { SetProperty(ref duration, value); }
         private string _userName;
         public string UserName
         {
@@ -58,18 +53,18 @@ namespace MyFirstApp.ViewModels
             _navigationService.NavigateAsync("MainPage/NavigationPage/InformationPage",p);
 
         }
-        const string User_Name = "name";
-        const string Pass_Word = "pass";
+        const string UserNameKey = "name";
+        const string PassWordKey = "pass";
 
         public async Task InitializeAsync(INavigationParameters parameters)
         {
-            if (parameters.ContainsKey(User_Name))
+            if (parameters.ContainsKey(UserNameKey))
             {
-                UserName = parameters.GetValue<String>(User_Name);
+                UserName = parameters.GetValue<String>(UserNameKey);
             }
-            if (parameters.ContainsKey(Pass_Word))
+            if (parameters.ContainsKey(PassWordKey))
             {
-                PassWord = parameters.GetValue<String>(Pass_Word);
+                PassWord = parameters.GetValue<String>(PassWordKey);
             }
         }
 
@@ -81,25 +76,14 @@ namespace MyFirstApp.ViewModels
 
 
         //Logout Command
-        private DelegateCommand<string> _longPressCommand;
-        public DelegateCommand<string> LongPressCommand =>
-            _longPressCommand ?? (_longPressCommand = new DelegateCommand<string>(ExecuteLongPressCommand));
+        private DelegateCommand<string> _longPressCommandButtonLogOut;
+        public DelegateCommand<string> LongPressCommandButtonLogOut =>
+            _longPressCommandButtonLogOut ?? (_longPressCommandButtonLogOut = new DelegateCommand<string>(ExecuteLongPressCommand));
 
         void ExecuteLongPressCommand(string uri)
         {
             _navigationService.NavigateAsync(uri);
         }
-
-
-        private DelegateCommand _abc;
-        public DelegateCommand HauCommand =>
-            _abc ?? (_abc = new DelegateCommand(ExecuteHauCommand));
-
-        void ExecuteHauCommand()
-        {
-            _navigationService.NavigateAsync("LoginPage");
-        }
-        
 
     }
 }

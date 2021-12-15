@@ -9,8 +9,7 @@ namespace MyFirstApp.Services
 {
     public class UserService : IUserService
     {
-        public const string API = "http://jsonplaceholder.typicode.com";
-
+        const string API = "http://jsonplaceholder.typicode.com";
         public async Task<List<User>> GetUsers()
         {
             var responseUser = RestService.For<IUserService>(API);
