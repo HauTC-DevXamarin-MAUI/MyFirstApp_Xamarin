@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using MyFirstApp.Droid.Effects;
 using MyFirstApp.Effects;
 using System;
 using System.Collections.Generic;
@@ -12,29 +13,22 @@ using System.Text;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 
+[assembly: ResolutionGroupName("MyFirstApp")]
+[assembly: ExportEffect(typeof(AndroidLongPressedEffect), "LongPressedEffect")]
 namespace MyFirstApp.Droid.Effects
 {
+
     public class AndroidLongPressedEffect : PlatformEffect
     {
         private bool _attached;
 
-        /// <summary>
-        /// Initializer to avoid linking out
-        /// </summary>
+        
         public static void Initialize() { }
 
-        /// <summary>
-        /// Initializes a new instance of the
-        /// <see cref="T:Yukon.Application.AndroidComponents.Effects.AndroidLongPressedEffect"/> class.
-        /// Empty constructor required for the odd Xamarin.Forms reflection constructor search
-        /// </summary>
-        public AndroidLongPressedEffect()
-        {
-        }
+        //public AndroidLongPressedEffect()
+        //{
+        //}
 
-        /// <summary>
-        /// Apply the handler
-        /// </summary>
         protected override void OnAttached()
         {
             //because an effect can be detached immediately after attached (happens in listview), only attach the handler one time.
@@ -44,6 +38,7 @@ namespace MyFirstApp.Droid.Effects
                 {
                     Control.LongClickable = true;
                     Control.LongClick += Control_LongClick;
+
                 }
                 else
                 {
@@ -53,22 +48,12 @@ namespace MyFirstApp.Droid.Effects
                 _attached = true;
             }
         }
-
-        /// <summary>
-        /// Invoke the command if there is one
-        /// </summary>
-        /// <param name="sender">Sender.</param>
-        /// <param name="e">E.</param>
         private void Control_LongClick(object sender, Android.Views.View.LongClickEventArgs e)
         {
-            Console.WriteLine("Invoking long click command");
+            Console.WriteLine("LongPress Ok");
             var command = LongPressedEffect.GetCommand(Element);
             command?.Execute(LongPressedEffect.GetCommandParameter(Element));
         }
-
-        /// <summary>
-        /// Clean the event handler on detach
-        /// </summary>
         protected override void OnDetached()
         {
             if (_attached)

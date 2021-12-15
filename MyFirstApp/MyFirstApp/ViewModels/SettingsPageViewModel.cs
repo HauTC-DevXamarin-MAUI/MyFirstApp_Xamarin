@@ -15,10 +15,10 @@ namespace MyFirstApp.ViewModels
         public DelegateCommand InitToggledCommand { get; set; }
         public SettingsPageViewModel()
         {
-            InitToggledCommand = new DelegateCommand(() => ExcuteItemSelected());
+            InitToggledCommand = new DelegateCommand(() => HandleOnSwitch());
         }
 
-        private void ExcuteItemSelected()
+        private void HandleOnSwitch()
         {
             IsToggled = !IsToggled;
             if(IsToggled)

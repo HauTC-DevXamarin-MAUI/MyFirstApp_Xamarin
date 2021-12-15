@@ -13,13 +13,6 @@ namespace MyFirstApp.ViewModels
 {
     public class LoginPageViewModel : BindableBase
     {
-        //private bool _isEnable;
-        //public bool IsEnable
-        //{
-        //    get { return _isEnable; }
-        //    set { SetProperty(ref _isEnable, value); }
-        //}
-
         private string _username;
         public string UserName
         {
@@ -70,9 +63,9 @@ namespace MyFirstApp.ViewModels
 
         private DelegateCommand _loginCommand;
         public DelegateCommand LoginCommand =>
-            _loginCommand ?? (_loginCommand = new DelegateCommand(ExecuteLoginCommand, CanExecuteLoginCommand));
+            _loginCommand ?? (_loginCommand = new DelegateCommand(HandleLoginCommand, HandleCanLoginCommand));
 
-        async void ExecuteLoginCommand()
+        async void HandleLoginCommand()
         {
             var p = new NavigationParameters();
             p.Add("name", UserName);
@@ -81,7 +74,7 @@ namespace MyFirstApp.ViewModels
             await _navigationService.NavigateAsync("/MainPage/NavigationPage/MyPage",p);
         }
 
-        bool CanExecuteLoginCommand()
+        bool HandleCanLoginCommand()
         {
             return !String.IsNullOrEmpty(UserName) && !String.IsNullOrEmpty(PassWord) && IsChecked;
         }

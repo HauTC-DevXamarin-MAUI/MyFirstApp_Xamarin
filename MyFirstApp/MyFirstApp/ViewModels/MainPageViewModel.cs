@@ -15,17 +15,17 @@ namespace MyFirstApp.ViewModels
         //{
         //    get { return duration; }
         //    set { SetProperty(ref duration, value); }
-        private string _name;
-        public string Name
+        private string _userName;
+        public string UserName
         {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
+            get { return _userName; }
+            set { SetProperty(ref _userName, value); }
         }
-        private string _pass;
-        public string Pass
+        private string _passWord;
+        public string PassWord
         {
-            get { return _pass; }
-            set { SetProperty(ref _pass, value); }
+            get { return _passWord; }
+            set { SetProperty(ref _passWord, value); }
         }
 
         //Navigation URI
@@ -53,16 +53,24 @@ namespace MyFirstApp.ViewModels
         void ExecuteNavigateParameterCommand()
         {
             var p = new NavigationParameters();
-            p.Add("name", Name);
-            p.Add("pass", Pass);
+            p.Add("name", UserName);
+            p.Add("pass", PassWord);
             _navigationService.NavigateAsync("MainPage/NavigationPage/InformationPage",p);
 
         }
+        const string User_Name = "name";
+        const string Pass_Word = "pass";
 
         public async Task InitializeAsync(INavigationParameters parameters)
         {
-            Name = parameters.GetValue<String>("name");
-            Pass = parameters.GetValue<String>("pass");
+            if (parameters.ContainsKey(User_Name))
+            {
+                UserName = parameters.GetValue<String>(User_Name);
+            }
+            if (parameters.ContainsKey(Pass_Word))
+            {
+                PassWord = parameters.GetValue<String>(Pass_Word);
+            }
         }
 
         public MainPageViewModel(INavigationService navigationService)
@@ -81,6 +89,17 @@ namespace MyFirstApp.ViewModels
         {
             _navigationService.NavigateAsync(uri);
         }
+
+
+        private DelegateCommand _abc;
+        public DelegateCommand HauCommand =>
+            _abc ?? (_abc = new DelegateCommand(ExecuteHauCommand));
+
+        void ExecuteHauCommand()
+        {
+            _navigationService.NavigateAsync("LoginPage");
+        }
+        
 
     }
 }

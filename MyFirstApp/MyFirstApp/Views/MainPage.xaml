@@ -11,6 +11,19 @@
                   Title="Main Page">
 
 
+    <MasterDetailPage.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontAttributes"
+                    Value="Bold"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BackgroundColor"
+                    Value="DeepPink"/>
+            <Setter Property="TextColor"
+                    Value="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"/>
+        </Style>
+    </MasterDetailPage.Resources>
 
     <MasterDetailPage.Master>
         <ContentPage Title="Menu"
@@ -24,7 +37,7 @@
 
                 <StackLayout Grid.Row="0" 
                                  Grid.ColumnSpan="2" 
-                                 BackgroundColor="{AppThemeBinding Dark={StaticResource SystemPinkDark},
+                                 BackgroundColor="{AppThemeBinding Dark={StaticResource CardBackgroundDark},
                                                    Light={StaticResource SystemPink }}" 
                                  HeightRequest="120" 
                                  Orientation="Horizontal" 
@@ -42,15 +55,17 @@
                     </Frame>
                     <StackLayout VerticalOptions="Center" 
                                      Spacing="2">
-                        <Label Text="{Binding Name}" 
+                        <Label Text="{Binding UserName}" 
                                    FontAttributes="Bold" 
                                    FontSize="Large" 
-                                   TextColor="White" 
+                                   TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"
                                    Margin="10,0,0,0" 
                                    VerticalOptions="Center"/>
-                        <Label Text="{Binding Name,StringFormat='{0:2F}@gmail.com'}" 
+                        <Label Text="{Binding UserName,StringFormat='{0:2F}@gmail.com'}" 
                                    FontSize="Small" 
-                                   TextColor="White" 
+                                   TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}" 
                                    Margin="10,0,0,0" 
                                    VerticalOptions="Center"/>
                     </StackLayout>
@@ -71,14 +86,16 @@
                     <renderer:MyCustomeButton Text="Thông tin cá nhân"
                                               CustomBorderColor="DeepPink"  
                                               CustomBackgroundColor="Pink"
-                                              TextColor="White"
+                                              TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"
                                               CustomBorderRadius="4"  
                                               CustomBorderWidth="4"
                                               Command="{Binding NavigateParameterCommand}" />
                     <renderer:MyCustomeButton Text="Duyệt hình ảnh"
                                               CustomBorderColor="DeepPink"  
                                               CustomBackgroundColor="Pink"
-                                              TextColor="White"
+                                              TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"
                                               CustomBorderRadius="4"  
                                               CustomBorderWidth="4"
                                               Command="{Binding NavigateCommand}" 
@@ -87,7 +104,8 @@
                     <renderer:MyCustomeButton Text="Cài đặt"
                                               CustomBorderColor="DeepPink"  
                                               CustomBackgroundColor="Pink"
-                                              TextColor="White"
+                                              TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"
                                               CustomBorderRadius="4"  
                                               CustomBorderWidth="4"
                                               Command="{Binding NavigateCommand}" 
@@ -95,7 +113,8 @@
                     
                     <renderer:MyCustomeButton x:Name="btnLogOut" 
                                               Text="Đăng Xuất"
-                                              TextColor="White"
+                                              TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"
                                               CustomBorderColor="Pink"  
                                               CustomBackgroundColor="DeepPink"
                                               CustomBorderRadius="4"  
@@ -108,6 +127,14 @@
                             <effects:LongPressedEffect/>
                         </renderer:MyCustomeButton.Effects>-->
                     </renderer:MyCustomeButton>
+
+                    <Button Text="Đăng Xuất Using Effect"
+                            effects:LongPressedEffect.Command="{Binding LongPressCommand}"
+                            effects:LongPressedEffect.CommandParameter="LoginPage">
+                        <Button.Effects>
+                            <effects:LongPressedEffect/>
+                        </Button.Effects>
+                    </Button>
                 </StackLayout>
             </Grid>
         </ContentPage>

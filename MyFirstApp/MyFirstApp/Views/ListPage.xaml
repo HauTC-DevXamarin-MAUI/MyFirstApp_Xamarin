@@ -6,7 +6,8 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="MyFirstApp.Views.ListPage"
              Title="List Page">
-    <StackLayout>
+    <StackLayout BackgroundColor="{AppThemeBinding Dark={StaticResource SystemGray3Dark},
+                                                   Light={StaticResource SystemGray6 }}">
         <ListView ItemsSource="{Binding PostList}" 
                   SeparatorColor="Red"
                   HasUnevenRows="True"
@@ -41,14 +42,19 @@
                                        VerticalTextAlignment="Center"
                                        FontAttributes="Bold"
                                        FontSize="Subtitle"
-                                       LineBreakMode="TailTruncation"/>
+                                       LineBreakMode="TailTruncation"
+                                       TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"/>
                                 <Label Text="{Binding TitleAlbum}"
                                        VerticalTextAlignment="Center"
-                                       FontSize="Caption"/>
+                                       FontSize="Caption"
+                                       TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"/>
                                 <Label Text="{Binding Username}"
                                        HorizontalTextAlignment="End"
                                        FontSize="Small"
-                                       TextColor="LightGreen"/>
+                                       TextColor="{AppThemeBinding Dark={StaticResource SystemGreenDark},
+                                                   Light={StaticResource SystemGreen }}"/>
                             </StackLayout>
                             
                         </StackLayout>

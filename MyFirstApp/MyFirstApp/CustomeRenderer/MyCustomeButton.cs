@@ -38,7 +38,7 @@ namespace MyFirstApp.CustomeRenderer
                  nameof(CustomBorderWidth),
                  typeof(double),
                  typeof(MyCustomeButton),
-                 4.0);
+                 4.0d);
 
         public double CustomBorderWidth
         {

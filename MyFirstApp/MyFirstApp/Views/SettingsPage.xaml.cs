@@ -20,11 +20,6 @@ namespace MyFirstApp.Views
             }
 
         }
-
-        private void switchTheme_OnToggled(object sender, ToggledEventArgs e)
-        {
-            
-        }
         
     }
 }

@@ -5,42 +5,50 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              Title="Infomation Page"
              x:Class="MyFirstApp.Views.InformationPage">
-    <StackLayout VerticalOptions="Center"
-                 HorizontalOptions="Center">
-        <Frame HeightRequest="200" 
+    <StackLayout VerticalOptions="FillAndExpand"
+                 HorizontalOptions="FillAndExpand"
+                 Padding="50"
+                 BackgroundColor="{AppThemeBinding Dark={StaticResource SystemGray6Dark},
+                                                   Light={StaticResource SystemGray6 }}">
+        <StackLayout VerticalOptions="Center"
+                     HorizontalOptions="Center">
+            <Frame HeightRequest="200" 
                WidthRequest="200"
                BackgroundColor="White"
                CornerRadius="200"
                Padding="0"
                Margin="0">
-            <Image Source="hau.jpg"
+                <Image Source="hau.jpg"
                    Aspect="Fill"
                    Margin="0"/>
-        </Frame>
-        <Label Text="{Binding UserName, StringFormat='UserName: {0:F2}'}"
+            </Frame>
+            <Label Text="{Binding UserName, StringFormat='UserName: {0:F2}'}"
                FontSize="Subtitle"
                FontAttributes="Bold"
                HorizontalOptions="CenterAndExpand"
-               TextColor="Black"/>
-        <Label Text="{Binding PassWord, StringFormat='PassWord: {0:F2}'}"
-               HorizontalOptions="CenterAndExpand"
-               FontSize="Subtitle"
-               FontAttributes="Bold"
-               TextColor="LightGray"/>
-        <Label Text="{Binding UserName, StringFormat='Email: {0:F2}'}"
+               TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"/>
+            <Label Text="{Binding PassWord, StringFormat='PassWord: {0:F2}'}"
                HorizontalOptions="CenterAndExpand"
                FontSize="Subtitle"
                FontAttributes="Bold"
                TextColor="LightGray"/>
-        <!--Btn-->
-        <Button Text="Back"
+            <Label Text="{Binding UserName, StringFormat='Email: {0:F2}@gmail.com'}"
+               HorizontalOptions="CenterAndExpand"
+               FontSize="Subtitle"
+               FontAttributes="Bold"
+               TextColor="LightGray"/>
+            <!--Btn-->
+            <Button Text="Back"
                 WidthRequest="200"
-                BackgroundColor="Purple"
-                TextColor="White"
+                BackgroundColor="{AppThemeBinding Dark={StaticResource SystemPinkDark},
+                                                   Light={StaticResource SystemPink }}" 
+                TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
+                                                   Light={StaticResource TextColor }}"
                 CornerRadius="10"
                 FontAttributes="Bold"
-                IsEnabled="False"
                 Command="{Binding BackCommand}"/>
+        </StackLayout>
     </StackLayout>
     
 </ContentPage>

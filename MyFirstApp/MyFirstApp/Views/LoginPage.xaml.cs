@@ -15,10 +15,5 @@ namespace MyFirstApp.Views
             //showLoginIndicator.IsVisible = true;
             //showLoginIndicator.IsRunning = true;
         }
-
-        private void Button_Clicked(object sender, System.EventArgs e)
-        {
-            
-        }
     }
 }

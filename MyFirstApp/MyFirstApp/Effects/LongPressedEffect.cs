@@ -8,15 +8,17 @@ namespace MyFirstApp.Effects
 {
     public class LongPressedEffect : RoutingEffect
     {
-        public LongPressedEffect() : base("MyFirstApp.Effects.LongPressedEffect")
+        public LongPressedEffect() : base("MyFirstApp.LongPressedEffect")
         {
         }
-        public static readonly BindableProperty CommandProperty = BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(LongPressedEffect), (object)null);
+
+        public static readonly BindableProperty CommandProperty = 
+            BindableProperty.CreateAttached("Command", typeof(ICommand), typeof(LongPressedEffect), (object)null);
         
-        public static ICommand GetCommand(BindableObject view)
-        {
-            return (ICommand)view.GetValue(CommandProperty);
-        }
+            public static ICommand GetCommand(BindableObject view)
+            {
+                return (ICommand)view.GetValue(CommandProperty);
+            }
 
         public static void SetCommand(BindableObject view, ICommand value)
         {
@@ -24,7 +26,8 @@ namespace MyFirstApp.Effects
         }
 
 
-        public static readonly BindableProperty CommandParameterProperty = BindableProperty.CreateAttached("CommandParameter", typeof(object), typeof(LongPressedEffect), (object)null);
+        public static readonly BindableProperty CommandParameterProperty = 
+            BindableProperty.CreateAttached("CommandParameter", typeof(object), typeof(LongPressedEffect), (object)null);
         public static object GetCommandParameter(BindableObject view)
         {
             return view.GetValue(CommandParameterProperty);

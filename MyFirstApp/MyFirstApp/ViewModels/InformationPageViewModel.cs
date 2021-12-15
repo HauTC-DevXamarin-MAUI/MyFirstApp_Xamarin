@@ -13,6 +13,8 @@ namespace MyFirstApp.ViewModels
 {
     public class InformationPageViewModel : BindableBase, IInitializeAsync
     {
+        //Parameters Username and PassWord
+        #region Parameters Username and PassWord
         private string _username;
         public string UserName
         {
@@ -26,45 +28,42 @@ namespace MyFirstApp.ViewModels
             get { return _passWord; }
             set { SetProperty(ref _passWord, value); }
         }
-
-
-        //protected IEventAggregator _ea;      
-        //void HandleSubscribe()
-        //{
-        //    _ea.GetEvent<SendEvent>().Subscribe(MessageReceived, ThreadOption.UIThread);
-        //}
-        //private void MessageReceived(string obj)
-        //{
-        //    ABC = obj;
-        //}
+        #endregion
 
 
         private readonly INavigationService _navigationService;
 
         private DelegateCommand _backCommand;
         public DelegateCommand BackCommand =>
-            _backCommand ?? (_backCommand = new DelegateCommand(ExecuteBackCommand));
+            _backCommand ?? (_backCommand = new DelegateCommand(HandleBackCommand));
 
-        async void ExecuteBackCommand()
+        async void HandleBackCommand()
         {
+
             var p = new NavigationParameters();
             p.Add("name", UserName);
             p.Add("pass", PassWord);
+
             await _navigationService.NavigateAsync("/MainPage/NavigationPage/MyPage", p);
-            //await _navigationService.NavigateAsync("/NavigationPage/MainPage/MyPage");
 
         }
-
+        //Const 
+        const string User_Name = "name";
+        const string Pass_Word = "pass";
         public async Task InitializeAsync(INavigationParameters parameters)
         {
-            UserName = parameters.GetValue<String>("name");
-            PassWord = parameters.GetValue<String>("pass");
+            if (parameters.ContainsKey(User_Name))
+            {
+                UserName = parameters.GetValue<String>(User_Name);
+            }
+            if (parameters.ContainsKey(Pass_Word))
+            {
+                PassWord = parameters.GetValue<String>(Pass_Word);
+            }
         }
 
         public InformationPageViewModel(INavigationService navigationService)
         {
-            //_ea = ea;
-            //HandleSubscribe();
             _navigationService = navigationService;
         }
     }
