@@ -47,8 +47,8 @@ namespace MyFirstApp.Droid.Effects
             float y_Btn_Screen = Control.GetY();
             float x_Mouse_Screen = x_Mouse_Btn + x_Btn_Screen;
             float y_Mouse_Screen = y_Mouse_Btn + y_Btn_Screen;
-            float HeightBtn = 125;
-            float WidthBtn = 795;
+            float HeightBtn = Control.Height;
+            float WidthBtn = Control.Width;
 
             if (e.Event.Action == MotionEventActions.Down)
             {
