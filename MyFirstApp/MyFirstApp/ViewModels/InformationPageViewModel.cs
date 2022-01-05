@@ -15,18 +15,23 @@ namespace MyFirstApp.ViewModels
     {
         //Parameters Username and PassWord
         #region Parameters Username and PassWord
-        private string _username;
-        public string UserName
+        private string _name;
+        public string Name
         {
-            get { return _username; }
-            set { SetProperty(ref _username, value); }
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
         }
-
-        private string _passWord;
-        public string PassWord
+        private string _email;
+        public string Email
         {
-            get { return _passWord; }
-            set { SetProperty(ref _passWord, value); }
+            get { return _email; }
+            set { SetProperty(ref _email, value); }
+        }
+        private string _uriImage;
+        public string UriImage
+        {
+            get { return _uriImage; }
+            set { SetProperty(ref _uriImage, value); }
         }
         #endregion
 
@@ -41,24 +46,30 @@ namespace MyFirstApp.ViewModels
         {
 
             var p = new NavigationParameters();
-            p.Add("name", UserName);
-            p.Add("pass", PassWord);
+            p.Add("name", Name);
+            p.Add("email", Email);
+            p.Add("uri", UriImage);
 
             await _navigationService.NavigateAsync("/MainPage/NavigationPage/MyPage", p);
 
         }
         //Const 
-        const string UserNameKey = "name";
-        const string PassWordKey = "pass";
+        const string NameEmail = "name";
+        const string EmailAddress = "email";
+        const string UriPicture = "uri";
         public async Task InitializeAsync(INavigationParameters parameters)
         {
-            if (parameters.ContainsKey(UserNameKey))
+            if (parameters.ContainsKey(NameEmail))
             {
-                UserName = parameters.GetValue<String>(UserNameKey);
+                Name = parameters.GetValue<String>(NameEmail);
             }
-            if (parameters.ContainsKey(PassWordKey))
+            if (parameters.ContainsKey(EmailAddress))
             {
-                PassWord = parameters.GetValue<String>(PassWordKey);
+                Email = parameters.GetValue<String>(EmailAddress);
+            }
+            if (parameters.ContainsKey(UriPicture))
+            {
+                UriImage = parameters.GetValue<String>(UriPicture);
             }
         }
 

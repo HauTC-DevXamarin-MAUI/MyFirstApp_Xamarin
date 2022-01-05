@@ -42,6 +42,7 @@ namespace MyFirstApp
             containerRegistry.Register<IPhotoService, PhotoService>();
             containerRegistry.Register<IAlbumService, AlbumService>();
             containerRegistry.Register<IUserService, UserService>();
+            containerRegistry.Register<ILoginGoogleService, LoginGoogleService>();
 
 
             containerRegistry.RegisterForNavigation<SettingsPage, SettingsPageViewModel>();

@@ -21,30 +21,73 @@
         <converters:UsernameCorrectToHideLabelConverter x:Key="UsernameCorrectToHideLabelConverter" />
         <converters:PasswordCorrectConverter x:Key="PasswordCorrectConverter" />
         <converters:PasswordCorrectToHideLabelConverter x:Key="PasswordCorrectToHideLabelConverter" />
+        
+        <!--Style-->
+        <!--Style Stack Main-->
+        <Style x:Key="stackLayoutMainStyle"
+               TargetType="StackLayout">
+            <Setter Property="BackgroundColor"
+                    Value="LightGray"/>
+        </Style>
+        <!--Style Stack Logo Login-->
+        <Style x:Key="stackLayoutLoginStyle"
+               TargetType="StackLayout">
+            <Setter Property="Margin"
+                    Value="0"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+        </Style>
+        <!--Style Frame Logo Login-->
+        <Style x:Key="frameLoginStyle"
+               TargetType="Frame">
+            <Setter Property="HeightRequest"
+                    Value="150"/>
+            <Setter Property="HorizontalOptions"
+                    Value="FillAndExpand"/>
+            <Setter Property="Padding"
+                    Value="0"/>
+        </Style>
+        <!--Style Logo Login-->
+        <Style x:Key="logoLoginStyle"
+               TargetType="Image">
+            <Setter Property="Aspect"
+                    Value="AspectFill"/>
+            <Setter Property="Margin"
+                    Value="0"/>
+        </Style>
+        <!--Style Stack content-->
+        <Style x:Key="stackContentStyle"
+               TargetType="StackLayout">
+            <Setter Property="Margin"
+                    Value="15,110,15,0"/>
+        </Style>
+        <!--Style Frame content-->
+        <Style x:Key="frameContentStyle"
+               TargetType="Frame">
+            <Setter Property="HasShadow"
+                    Value="True"/>
+            <Setter Property="HeightRequest"
+                    Value="520"/>
+            <Setter Property="HorizontalOptions"
+                    Value="FillAndExpand"/>
+        </Style>
+        
     </ContentPage.Resources>
 
-    <StackLayout Padding="0"
-                 BackgroundColor="LightGray">
+    <StackLayout Style="{StaticResource stackLayoutMainStyle}">
         <Grid>
-            <StackLayout Padding="0"
-                         Margin="0">
-                <Frame BackgroundColor="LightPink"
-                       HeightRequest="150"
-                       HorizontalOptions="FillAndExpand"
-                       Padding="0">
+            <StackLayout Style="{StaticResource stackLayoutLoginStyle}">
+                <Frame Style="{StaticResource frameLoginStyle}">
                     <Image Source="login.jpeg" 
-                           Aspect="AspectFill"
-                           Margin="0"/>
+                           Style="{StaticResource logoLoginStyle}"/>
                 </Frame>
             </StackLayout>
-            
-            <StackLayout Margin="15,110,15,0">
+
+            <StackLayout Style="{StaticResource stackContentStyle}">
                 <!--Container-->
                 <Frame BackgroundColor="{AppThemeBinding Dark={StaticResource SystemGray},
                                                          Light={StaticResource SystemGray6}}"
-                       HasShadow="True"
-                       HeightRequest="520"
-                       HorizontalOptions="FillAndExpand">
+                       Style="{StaticResource frameContentStyle}">
                     <StackLayout>
                         <!--SignIN-->
                         <StackLayout HorizontalOptions="CenterAndExpand">
@@ -244,8 +287,8 @@
                         </StackLayout>
 
                         <StackLayout>
-                            <Grid>                                
-                            <BoxView BackgroundColor="DarkGray"
+                            <Grid>
+                                <BoxView BackgroundColor="DarkGray"
                                      HeightRequest="1"
                                      Margin="50"
                                      HorizontalOptions="CenterAndExpand"
@@ -292,10 +335,12 @@
                                     <Image Source="gmail.jpg" 
                                            Aspect="AspectFill"
                                            Margin="0"/>
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding LoginGoogleCommand}"/>
+                                    </Frame.GestureRecognizers>
                                 </Frame>
                             </StackLayout>
                         </StackLayout>
-                        
                     </StackLayout>
                 </Frame>
             </StackLayout>

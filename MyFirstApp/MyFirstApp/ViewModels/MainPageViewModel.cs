@@ -1,4 +1,6 @@
-﻿using Prism.Commands;
+﻿using MyFirstApp.Services;
+using Plugin.GoogleClient;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -10,19 +12,45 @@ namespace MyFirstApp.ViewModels
 {
     public class MainPageViewModel : BindableBase, IInitializeAsync
     {
-        private string _userName;
-        public string UserName
+        private ILoginGoogleService _loginGoogleService;
+        #region LogoutGoogle
+        private readonly IGoogleClientManager _googleClientManager = CrossGoogleClient.Current;
+        private DelegateCommand _logoutGoogleCommand;
+        public DelegateCommand LogoutGoogleCommand =>
+            _logoutGoogleCommand ?? (_logoutGoogleCommand = new DelegateCommand(Logout));
+
+        public void Logout()
         {
-            get { return _userName; }
-            set { SetProperty(ref _userName, value); }
-        }
-        private string _passWord;
-        public string PassWord
-        {
-            get { return _passWord; }
-            set { SetProperty(ref _passWord, value); }
+            _googleClientManager.OnLogout += OnLogoutCompleted;
+            _loginGoogleService.Logout();
         }
 
+        private void OnLogoutCompleted(object sender, EventArgs loginEventArgs)
+        {
+            _googleClientManager.OnLogout -= OnLogoutCompleted;
+            _navigationService.NavigateAsync("/LoginPage");
+        }
+        #endregion
+
+        private string _name;
+        public string Name
+        {
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+        private string _email;
+        public string Email
+        {
+            get { return _email; }
+            set { SetProperty(ref _email, value); }
+        }
+        private string _uriImage;
+        public string UriImage
+        {
+            get { return _uriImage; }
+            set { SetProperty(ref _uriImage, value); }
+        }
+        
         //Navigation URI
         private readonly INavigationService _navigationService;
 
@@ -48,31 +76,39 @@ namespace MyFirstApp.ViewModels
         void ExecuteNavigateParameterCommand()
         {
             var p = new NavigationParameters();
-            p.Add("name", UserName);
-            p.Add("pass", PassWord);
+            p.Add(NameEmail, Name);
+            p.Add(EmailAddress, Email);
+            p.Add(UriPicture, UriImage);
             _navigationService.NavigateAsync("MainPage/NavigationPage/InformationPage",p);
 
         }
-        const string UserNameKey = "name";
-        const string PassWordKey = "pass";
+        const string NameEmail = "name";
+        const string EmailAddress = "email";
+        const string UriPicture = "uri";
 
         public async Task InitializeAsync(INavigationParameters parameters)
         {
-            if (parameters.ContainsKey(UserNameKey))
+            if (parameters.ContainsKey(NameEmail))
             {
-                UserName = parameters.GetValue<String>(UserNameKey);
+                Name = parameters.GetValue<String>(NameEmail);
             }
-            if (parameters.ContainsKey(PassWordKey))
+            if (parameters.ContainsKey(EmailAddress))
             {
-                PassWord = parameters.GetValue<String>(PassWordKey);
+                Email = parameters.GetValue<String>(EmailAddress);
+            }
+            if (parameters.ContainsKey(UriPicture))
+            {
+                UriImage = parameters.GetValue<String>(UriPicture);
             }
         }
 
-        public MainPageViewModel(INavigationService navigationService)
+        public MainPageViewModel(INavigationService navigationService, ILoginGoogleService loginGoogleService)
         {
             //Duration = 150;
+            _loginGoogleService = loginGoogleService;
             _navigationService = navigationService;
         }
+
 
 
         //Logout Command

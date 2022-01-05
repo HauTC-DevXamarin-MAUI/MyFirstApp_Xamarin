@@ -18,22 +18,17 @@
                CornerRadius="200"
                Padding="0"
                Margin="0">
-                <Image Source="hau.jpg"
+                <Image Source="{Binding UriImage}"
                    Aspect="Fill"
                    Margin="0"/>
             </Frame>
-            <Label Text="{Binding UserName, StringFormat='UserName: {0:F2}'}"
+            <Label Text="{Binding Name, StringFormat='UserName: {0:F2}'}"
                FontSize="Subtitle"
                FontAttributes="Bold"
                HorizontalOptions="CenterAndExpand"
                TextColor="{AppThemeBinding Dark={StaticResource TextColorDark},
                                                    Light={StaticResource TextColor }}"/>
-            <Label Text="{Binding PassWord, StringFormat='PassWord: {0:F2}'}"
-               HorizontalOptions="CenterAndExpand"
-               FontSize="Subtitle"
-               FontAttributes="Bold"
-               TextColor="LightGray"/>
-            <Label Text="{Binding UserName, StringFormat='Email: {0:F2}@gmail.com'}"
+            <Label Text="{Binding Email, StringFormat='Email: {0:F2}'}"
                HorizontalOptions="CenterAndExpand"
                FontSize="Subtitle"
                FontAttributes="Bold"
